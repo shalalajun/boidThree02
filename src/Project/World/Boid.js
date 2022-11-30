@@ -23,6 +23,7 @@ export default class Boid
         
         this.f = new THREE.Vector3();
 
+        this.G = 1;
         this.mass = 2;
 
         this.width = window.innerWidth;
@@ -74,6 +75,12 @@ export default class Boid
     {
         const force = new THREE.Vector3();
         force.subVectors(this.position,p.position);
+        force.normalize();
+        const distance = this.position.distanceTo(p.position);
+        const strength = (this.G * this.mass * p.mass) / (distance * distance);
+        force.multiplyScalar(strength);
         console.log(force);
+        return force;
+        
     }
 }
