@@ -35,7 +35,7 @@ export default class Project
         this.world = new World();
         this.boid = new Boid();
         this.boid2 = new Boid();
-        this.gravity = new THREE.Vector3(0, -0.032, 0);
+        this.gravity = new THREE.Vector3(0, -0.01 * 2, 0);
         this.wind = new THREE.Vector3(0.002,0,0);
         this.wind2 = new THREE.Vector3(-0.001,0,0);
 
@@ -69,6 +69,8 @@ export default class Project
         this.boid.applyForce(this.wind);
         this.boid.update();
         this.boid.edges();
-       
+        this.boid2.update();
+        this.boid2.edges();
+        this.boid.calculateAttraction(this.boid2);
     }
 }

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import Project from '../Project.js';
-import World from './World.js';
+//import World from './World.js';
 
 
 // f = m * a 힘을 질량 곱하기 가속도
@@ -23,7 +23,7 @@ export default class Boid
         
         this.f = new THREE.Vector3();
 
-        this.mass = 20;
+        this.mass = 2;
 
         this.width = window.innerWidth;
         this.height =window.innerHeight;
