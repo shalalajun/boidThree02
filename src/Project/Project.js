@@ -34,8 +34,10 @@ export default class Project
         this.renderer = new Renderer();
         this.world = new World();
         this.boid = new Boid();
-        this.gravity = new THREE.Vector3(0, -0.005, 0);
+        this.boid2 = new Boid();
+        this.gravity = new THREE.Vector3(0, -0.032, 0);
         this.wind = new THREE.Vector3(0.002,0,0);
+        this.wind2 = new THREE.Vector3(-0.001,0,0);
 
 
         this.sizes.on('resize',()=>
@@ -61,8 +63,10 @@ export default class Project
         this.camera.update();
         this.renderer.update();
         this.boid.applyForce(this.gravity);
+        this.boid2.applyForce(this.gravity);
+        this.boid2.applyForce(this.wind2);
         //window.addEventListener('mousedown', this.boid.applyForce(this.wind), false);
-        //this.boid.applyForce(this.wind);
+        this.boid.applyForce(this.wind);
         this.boid.update();
         this.boid.edges();
        
