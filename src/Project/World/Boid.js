@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import Project from '../Project.js';
+import P5 from 'p5';
 //import World from './World.js';
 
 
@@ -75,11 +76,14 @@ export default class Boid
     {
         const force = new THREE.Vector3();
         force.subVectors(this.position,p.position);
+        var tempPos = this.position.clone();
+        const force2 = tempPos.sub(p.position);
+       //console.log(force2);
         force.normalize();
         const distance = this.position.distanceTo(p.position);
         const strength = (this.G * this.mass * p.mass) / (distance * distance);
         force.multiplyScalar(strength);
-        console.log(force);
+        //console.log(force);
         return force;
         
     }

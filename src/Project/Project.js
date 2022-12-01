@@ -8,7 +8,7 @@ import Resources from './Utils/Resources.js';
 import sources from './sources.js'
 import Boid from './World/Boid.js'
 
-
+import P5 from 'p5';
 
 let instance = null;
 
@@ -22,6 +22,8 @@ export default class Project
             return instance;
         }
 
+
+       
         instance = this;
 
         window.project = this;
