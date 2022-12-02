@@ -5,10 +5,12 @@ import Camera from './Camera.js';
 import Renderer from './Renderer.js';
 import World from './World/World.js';
 import Resources from './Utils/Resources.js';
-import sources from './sources.js'
-import Boid from './World/Boid.js'
+import sources from './sources.js';
+import Boid from './World/Boid.js';
+import FBOPlane from './World/FBOPlane.js';
 
 import P5 from 'p5';
+
 
 let instance = null;
 
@@ -41,6 +43,7 @@ export default class Project
         this.gravity = new THREE.Vector3(0, -0.01 * 2, 0);
         this.wind = new THREE.Vector3(0.002,0,0);
         this.wind2 = new THREE.Vector3(-0.001,0,0);
+        this.fboPlane = new FBOPlane();
 
         for(let i =0; i < 100; i++)
         {
@@ -81,6 +84,7 @@ export default class Project
         this.boid.edges();
         this.boid2.update();
         this.boid2.edges();
+        this.fboPlane.update();
 
         for(let i =0; i < 100; i++)
         {
