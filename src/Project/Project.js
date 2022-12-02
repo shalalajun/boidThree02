@@ -37,9 +37,15 @@ export default class Project
         this.world = new World();
         this.boid = new Boid();
         this.boid2 = new Boid();
+        this.boids = [];
         this.gravity = new THREE.Vector3(0, -0.01 * 2, 0);
         this.wind = new THREE.Vector3(0.002,0,0);
         this.wind2 = new THREE.Vector3(-0.001,0,0);
+
+        for(let i =0; i < 100; i++)
+        {
+            this.boids[i] = new Boid(Math.random()*30,Math.random()*10,Math.random()*20);
+        }
 
 
         this.sizes.on('resize',()=>
@@ -64,6 +70,8 @@ export default class Project
     {
         this.camera.update();
         this.renderer.update();
+        const force = this.boid.calculateAttraction(this.boid2);
+        this.boid2.applyForce(force);
         this.boid.applyForce(this.gravity);
         this.boid2.applyForce(this.gravity);
         this.boid2.applyForce(this.wind2);
@@ -73,6 +81,14 @@ export default class Project
         this.boid.edges();
         this.boid2.update();
         this.boid2.edges();
-        this.boid.calculateAttraction(this.boid2);
+
+        for(let i =0; i < 100; i++)
+        {
+            this.boids[i].update();
+            this.boids[i].edges();
+            this.boids[i].applyForce(this.gravity);
+            //console.log(this.boids);
+        }
+
     }
 }

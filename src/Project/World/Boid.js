@@ -11,13 +11,13 @@ import P5 from 'p5';
 
 export default class Boid
 {
-    constructor()
+    constructor(x,y,z)
     {
         this.project = new Project();
         this.scene = this.project.scene;
         this.birds;
 
-        this.position = new THREE.Vector3();
+        this.position = new THREE.Vector3(x, y, z);
         this.velocity = new THREE.Vector3(0,0,0);
         this.acceleration = new THREE.Vector3(0,0,0);
 
@@ -39,6 +39,7 @@ export default class Boid
         this.birdsGeometry = new THREE.BoxGeometry(1,1,1);
         this.birdsMaterial = new THREE.MeshStandardMaterial({color:'white'});
         this.birds = new THREE.Mesh(this.birdsGeometry, this.birdsMaterial);
+        this.birds.position.copy(this.position);
         this.scene.add(this.birds);
       
     }
@@ -74,17 +75,17 @@ export default class Boid
 
     calculateAttraction(p)
     {
-        const force = new THREE.Vector3();
-        force.subVectors(this.position,p.position);
+        // const force = new THREE.Vector3();
+        // force.subVectors(this.position,p.position);
         var tempPos = this.position.clone();
         const force2 = tempPos.sub(p.position);
        //console.log(force2);
-        force.normalize();
-        const distance = this.position.distanceTo(p.position);
-        const strength = (this.G * this.mass * p.mass) / (distance * distance);
-        force.multiplyScalar(strength);
+        //force.normalize();
+        const distance = Math.max(force2.length()+5,25);
+        var strength = (0.09*this.mass*this.mass)/(distance*distance);(distance * distance);
+        force2.multiplyScalar(strength);
         //console.log(force);
-        return force;
+        return force2;
         
     }
 }
